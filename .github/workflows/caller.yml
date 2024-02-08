@@ -7,7 +7,9 @@ jobs:
   caller-job-1:
     runs-on: ubuntu-latest
     steps:
-      - run: echo '${{toJson(github)}}'
+    - env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
   caller-job-2:
     needs: caller-job-1
     uses: sakula-target/called/.github/workflows/called.yml@main
